@@ -17,6 +17,9 @@ public class vLogin extends javax.swing.JFrame {
         initComponents();
         
         rsscalelabel.RSScaleLabel.setScaleLabel(imgBg, "src/imagenes/bg1.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(imgUser, "src/imagenes/usericon.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(imgContr, "src/imagenes/contraicon.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(imgLogo, "src/imagenes/logoinicio.png");
     }
 
     /**
@@ -32,52 +35,128 @@ public class vLogin extends javax.swing.JFrame {
         pUser = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        imgContr = new javax.swing.JLabel();
+        imgUser = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnRegistro = new javax.swing.JLabel();
+        btnRegistro1 = new javax.swing.JLabel();
+        btnIngresar = new javax.swing.JButton();
+        imgLogo = new javax.swing.JLabel();
         imgBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         pBg.setBackground(new java.awt.Color(255, 255, 255));
         pBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pUser.setBackground(new java.awt.Color(0, 0, 0));
 
-        jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField1");
+        imgContr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraicon.png"))); // NOI18N
+
+        imgUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usericon.png"))); // NOI18N
+        imgUser.setMaximumSize(new java.awt.Dimension(86, 101));
+        imgUser.setMinimumSize(new java.awt.Dimension(86, 101));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 0));
+        jLabel1.setText("Aun no tiene cuenta: ");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 0));
+        jLabel2.setText("Has olvidado tu contraseña:");
+
+        btnRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRegistro.setForeground(new java.awt.Color(0, 153, 0));
+        btnRegistro.setText("Cree una cuenta");
+
+        btnRegistro1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRegistro1.setForeground(new java.awt.Color(0, 153, 0));
+        btnRegistro1.setText("Recuperar contraseña");
 
         javax.swing.GroupLayout pUserLayout = new javax.swing.GroupLayout(pUser);
         pUser.setLayout(pUserLayout);
         pUserLayout.setHorizontalGroup(
             pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pUserLayout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
-                .addGroup(pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addGroup(pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pUserLayout.createSequentialGroup()
+                        .addGroup(pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imgUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imgContr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pUserLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pUserLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegistro))
+                            .addGroup(pUserLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegistro1)))))
                 .addGap(47, 47, 47))
         );
         pUserLayout.setVerticalGroup(
             pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pUserLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addGroup(pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imgContr, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnRegistro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnRegistro1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pBg.add(pUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 460, 300));
+        pBg.add(pUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 460, 300));
 
+        btnIngresar.setBackground(new java.awt.Color(51, 51, 51));
+        btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
+        pBg.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, 120, 40));
+
+        imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoinicio.png"))); // NOI18N
+        imgLogo.setText("jLabel3");
+        pBg.add(imgLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 400, 90));
+
+        imgBg.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         imgBg.setText("jLabel1");
-        pBg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
+        pBg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 540));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pBg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pBg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,6 +165,14 @@ public class vLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,7 +210,15 @@ public class vLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIngresar;
+    private javax.swing.JLabel btnRegistro;
+    private javax.swing.JLabel btnRegistro1;
     private javax.swing.JLabel imgBg;
+    private javax.swing.JLabel imgContr;
+    private javax.swing.JLabel imgLogo;
+    private javax.swing.JLabel imgUser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel pBg;
