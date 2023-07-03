@@ -29,14 +29,30 @@ public class vRegistro extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        pMenu = new javax.swing.JPanel();
         imgBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pMenu.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout pMenuLayout = new javax.swing.GroupLayout(pMenu);
+        pMenu.setLayout(pMenuLayout);
+        pMenuLayout.setHorizontalGroup(
+            pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 690, Short.MAX_VALUE)
+        );
+        pMenuLayout.setVerticalGroup(
+            pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 510, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(pMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 690, 510));
+
         imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bgdos.png"))); // NOI18N
-        jPanel1.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 660));
+        jPanel1.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 710));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,5 +106,6 @@ public class vRegistro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imgBg;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pMenu;
     // End of variables declaration//GEN-END:variables
 }
