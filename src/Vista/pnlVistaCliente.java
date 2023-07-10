@@ -8,15 +8,13 @@ package Vista;
  *
  * @author Fran
  */
-public class pnlRegistrarCl extends javax.swing.JPanel {
+public class pnlVistaCliente extends javax.swing.JPanel {
 
     /**
-     * Creates new form pnlRegistrarCl
+     * Creates new form pnlVistaCliente
      */
-    public pnlRegistrarCl() {
+    public pnlVistaCliente() {
         initComponents();
-        
-        
     }
 
     /**
@@ -48,10 +46,7 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        btnRegistrar = new com.k33ptoo.components.KButton();
         imgBgP = new javax.swing.JLabel();
-
-        setPreferredSize(new java.awt.Dimension(1440, 1024));
 
         PPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -186,14 +181,6 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
         PPrincipal.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
         PPrincipal.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 440, 39));
 
-        btnRegistrar.setText("Registrar cliente");
-        btnRegistrar.setkBorderRadius(20);
-        btnRegistrar.setkEndColor(new java.awt.Color(153, 153, 153));
-        btnRegistrar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
-        btnRegistrar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
-        btnRegistrar.setkStartColor(new java.awt.Color(153, 153, 153));
-        PPrincipal.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 770, 170, 50));
-
         imgBgP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         PPrincipal.add(imgBgP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 890));
 
@@ -220,7 +207,6 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.k33ptoo.components.KGradientPanel PPrincipal;
-    private com.k33ptoo.components.KButton btnRegistrar;
     private javax.swing.JLabel imgBgP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

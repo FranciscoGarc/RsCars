@@ -8,15 +8,13 @@ package Vista;
  *
  * @author Fran
  */
-public class pnlRegistrarCl extends javax.swing.JPanel {
+public class pnlControlClientes extends javax.swing.JPanel {
 
     /**
-     * Creates new form pnlRegistrarCl
+     * Creates new form pnlControlClientes
      */
-    public pnlRegistrarCl() {
+    public pnlControlClientes() {
         initComponents();
-        
-        
     }
 
     /**
@@ -49,9 +47,9 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         btnRegistrar = new com.k33ptoo.components.KButton();
+        btnRegistrar1 = new com.k33ptoo.components.KButton();
+        btnRegistrar2 = new com.k33ptoo.components.KButton();
         imgBgP = new javax.swing.JLabel();
-
-        setPreferredSize(new java.awt.Dimension(1440, 1024));
 
         PPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -124,7 +122,7 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
                                 .addComponent(jLabel6)
                                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jTextField2)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pLoginLayout.setVerticalGroup(
             pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +158,7 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
                 .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PPrincipal.add(pLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 820, 410));
@@ -175,8 +173,22 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         PPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 530, 730, 180));
 
@@ -192,7 +204,28 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
         btnRegistrar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
         btnRegistrar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
         btnRegistrar.setkStartColor(new java.awt.Color(153, 153, 153));
-        PPrincipal.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 770, 170, 50));
+        PPrincipal.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 760, 170, 50));
+
+        btnRegistrar1.setText("Eliminar cliente");
+        btnRegistrar1.setkBorderRadius(20);
+        btnRegistrar1.setkEndColor(new java.awt.Color(153, 153, 153));
+        btnRegistrar1.setkHoverForeGround(new java.awt.Color(51, 153, 0));
+        btnRegistrar1.setkHoverStartColor(new java.awt.Color(51, 255, 51));
+        btnRegistrar1.setkStartColor(new java.awt.Color(153, 153, 153));
+        btnRegistrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrar1ActionPerformed(evt);
+            }
+        });
+        PPrincipal.add(btnRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 760, 170, 50));
+
+        btnRegistrar2.setText("Actualizar cliente");
+        btnRegistrar2.setkBorderRadius(20);
+        btnRegistrar2.setkEndColor(new java.awt.Color(153, 153, 153));
+        btnRegistrar2.setkHoverForeGround(new java.awt.Color(51, 153, 0));
+        btnRegistrar2.setkHoverStartColor(new java.awt.Color(51, 255, 51));
+        btnRegistrar2.setkStartColor(new java.awt.Color(153, 153, 153));
+        PPrincipal.add(btnRegistrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 760, 170, 50));
 
         imgBgP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         PPrincipal.add(imgBgP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 890));
@@ -217,10 +250,16 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
+    private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.k33ptoo.components.KGradientPanel PPrincipal;
     private com.k33ptoo.components.KButton btnRegistrar;
+    private com.k33ptoo.components.KButton btnRegistrar1;
+    private com.k33ptoo.components.KButton btnRegistrar2;
     private javax.swing.JLabel imgBgP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

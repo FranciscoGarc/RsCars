@@ -25,6 +25,7 @@ int xMouse, yMouse;
      */
     public vDashboardRece() {
         initComponents();
+        rsscalelabel.RSScaleLabel.setScaleLabel(imgBg, "src/imagenes/bg1.png");
     }
 
     public static void ShowJPanel(JPanel p) {
@@ -57,7 +58,6 @@ int xMouse, yMouse;
         setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1200, 800));
         setResizable(false);
 
         PBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -128,7 +128,7 @@ int xMouse, yMouse;
         kButton2.setkPressedColor(new java.awt.Color(255, 102, 102));
         kButton2.setkSelectedColor(new java.awt.Color(255, 153, 153));
         kButton2.setkStartColor(new java.awt.Color(0, 102, 102));
-        PMenu.add(kButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 690, 110, 50));
+        PMenu.add(kButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 790, 110, 50));
 
         kButton6.setText("Registrar cliente");
         kButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -159,6 +159,11 @@ int xMouse, yMouse;
         kButton7.setkPressedColor(new java.awt.Color(0, 102, 0));
         kButton7.setkSelectedColor(new java.awt.Color(0, 102, 102));
         kButton7.setkStartColor(new java.awt.Color(0, 102, 102));
+        kButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                kButton7MouseClicked(evt);
+            }
+        });
         PMenu.add(kButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 220, 100));
 
         kButton8.setText("Alerta vehiculo listo");
@@ -174,14 +179,18 @@ int xMouse, yMouse;
         kButton8.setkStartColor(new java.awt.Color(0, 102, 102));
         PMenu.add(kButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 220, 100));
 
-        PBg.add(PMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 760));
+        PBg.add(PMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 880));
 
+        PPrincipal.setMaximumSize(new java.awt.Dimension(980, 840));
         PPrincipal.setLayout(new java.awt.BorderLayout());
 
         imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
-        PPrincipal.add(imgBg, java.awt.BorderLayout.CENTER);
+        imgBg.setMaximumSize(new java.awt.Dimension(980, 840));
+        imgBg.setMinimumSize(new java.awt.Dimension(980, 840));
+        imgBg.setPreferredSize(new java.awt.Dimension(980, 840));
+        PPrincipal.add(imgBg, java.awt.BorderLayout.LINE_END);
 
-        PBg.add(PPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 960, 760));
+        PBg.add(PPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 960, 880));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         PBg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 760));
@@ -190,7 +199,7 @@ int xMouse, yMouse;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PBg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PBg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +229,11 @@ int xMouse, yMouse;
         // TODO add your handling code here:
         ShowJPanel(new pnlRegistrarCl());
     }//GEN-LAST:event_kButton6MouseClicked
+
+    private void kButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kButton7MouseClicked
+        // TODO add your handling code here:
+        ShowJPanel(new pnlRegistrarVeh());
+    }//GEN-LAST:event_kButton7MouseClicked
 
     /**
      * @param args the command line arguments

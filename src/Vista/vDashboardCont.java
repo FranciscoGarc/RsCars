@@ -44,7 +44,6 @@ int xMouse, yMouse;
         setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1200, 800));
         setResizable(false);
 
         PBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -117,7 +116,7 @@ int xMouse, yMouse;
         kButton2.setkStartColor(new java.awt.Color(0, 102, 102));
         PMenu.add(kButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 690, 110, 50));
 
-        kButton6.setText("Citas");
+        kButton6.setText("Detalles de citas");
         kButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         kButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         kButton6.setkBackGroundColor(new java.awt.Color(0, 102, 51));
@@ -169,14 +168,14 @@ int xMouse, yMouse;
         kButton9.setkStartColor(new java.awt.Color(0, 102, 102));
         PMenu.add(kButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 220, 100));
 
-        PBg.add(PMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 760));
+        PBg.add(PMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 880));
 
         PPrincipal.setLayout(new java.awt.BorderLayout());
 
         imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         PPrincipal.add(imgBg, java.awt.BorderLayout.CENTER);
 
-        PBg.add(PPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 960, 760));
+        PBg.add(PPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 960, 880));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         PBg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 760));

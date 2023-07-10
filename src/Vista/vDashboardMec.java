@@ -4,6 +4,17 @@
  */
 package Vista;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Insets;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
+
 /**
  *
  * @author Fran
@@ -17,6 +28,15 @@ public class vDashboardMec extends javax.swing.JFrame {
         initComponents();
     }
 
+        public static void ShowJPanel(JPanel p) {
+        p.setSize(1440, 1024);
+        p.setLocation(0,0);
+        
+        PPrincipal.removeAll();
+        PPrincipal.add(p, BorderLayout.CENTER);
+        PPrincipal.revalidate();
+        PPrincipal.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,6 +55,7 @@ public class vDashboardMec extends javax.swing.JFrame {
         kButton6 = new com.k33ptoo.components.KButton();
         kButton7 = new com.k33ptoo.components.KButton();
         kButton8 = new com.k33ptoo.components.KButton();
+        kButton9 = new com.k33ptoo.components.KButton();
         PPrincipal = new com.k33ptoo.components.KGradientPanel();
         imgBg = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -43,7 +64,6 @@ public class vDashboardMec extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1200, 800));
         setMinimumSize(new java.awt.Dimension(1200, 800));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1200, 800));
         setResizable(false);
 
         PBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,7 +134,7 @@ public class vDashboardMec extends javax.swing.JFrame {
         kButton2.setkPressedColor(new java.awt.Color(255, 102, 102));
         kButton2.setkSelectedColor(new java.awt.Color(255, 153, 153));
         kButton2.setkStartColor(new java.awt.Color(0, 102, 102));
-        PMenu.add(kButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 690, 110, 50));
+        PMenu.add(kButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 820, 110, 50));
 
         kButton6.setText("Vista de clientes");
         kButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -127,6 +147,11 @@ public class vDashboardMec extends javax.swing.JFrame {
         kButton6.setkPressedColor(new java.awt.Color(0, 102, 0));
         kButton6.setkSelectedColor(new java.awt.Color(0, 102, 102));
         kButton6.setkStartColor(new java.awt.Color(0, 102, 102));
+        kButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                kButton6MouseClicked(evt);
+            }
+        });
         PMenu.add(kButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 220, 100));
 
         kButton7.setText("Vista de vehiculos");
@@ -140,9 +165,14 @@ public class vDashboardMec extends javax.swing.JFrame {
         kButton7.setkPressedColor(new java.awt.Color(0, 102, 0));
         kButton7.setkSelectedColor(new java.awt.Color(0, 102, 102));
         kButton7.setkStartColor(new java.awt.Color(0, 102, 102));
+        kButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                kButton7MouseClicked(evt);
+            }
+        });
         PMenu.add(kButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 220, 100));
 
-        kButton8.setText("Programar reparacion");
+        kButton8.setText("Citas a su nombre");
         kButton8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         kButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         kButton8.setkBackGroundColor(new java.awt.Color(0, 102, 51));
@@ -153,16 +183,29 @@ public class vDashboardMec extends javax.swing.JFrame {
         kButton8.setkPressedColor(new java.awt.Color(0, 102, 0));
         kButton8.setkSelectedColor(new java.awt.Color(0, 102, 102));
         kButton8.setkStartColor(new java.awt.Color(0, 102, 102));
-        PMenu.add(kButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 220, 100));
+        PMenu.add(kButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 220, 100));
 
-        PBg.add(PMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 760));
+        kButton9.setText("Programar reparacion");
+        kButton9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        kButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        kButton9.setkBackGroundColor(new java.awt.Color(0, 102, 51));
+        kButton9.setkEndColor(new java.awt.Color(51, 204, 0));
+        kButton9.setkForeGround(new java.awt.Color(0, 0, 0));
+        kButton9.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kButton9.setkHoverStartColor(new java.awt.Color(0, 204, 51));
+        kButton9.setkPressedColor(new java.awt.Color(0, 102, 0));
+        kButton9.setkSelectedColor(new java.awt.Color(0, 102, 102));
+        kButton9.setkStartColor(new java.awt.Color(0, 102, 102));
+        PMenu.add(kButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 220, 100));
+
+        PBg.add(PMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 880));
 
         PPrincipal.setLayout(new java.awt.BorderLayout());
 
         imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         PPrincipal.add(imgBg, java.awt.BorderLayout.CENTER);
 
-        PBg.add(PPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 960, 760));
+        PBg.add(PPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 960, 880));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         PBg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 760));
@@ -196,6 +239,16 @@ public class vDashboardMec extends javax.swing.JFrame {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_pArribaMousePressed
+
+    private void kButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kButton6MouseClicked
+        // TODO add your handling code here:
+        ShowJPanel(new pnlVistaCliente());
+    }//GEN-LAST:event_kButton6MouseClicked
+
+    private void kButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kButton7MouseClicked
+        // TODO add your handling code here:
+        ShowJPanel(new pnlVistaVehiculos());
+    }//GEN-LAST:event_kButton7MouseClicked
 
     /**
      * @param args the command line arguments
@@ -235,7 +288,7 @@ public class vDashboardMec extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.k33ptoo.components.KGradientPanel PBg;
     private com.k33ptoo.components.KGradientPanel PMenu;
-    private com.k33ptoo.components.KGradientPanel PPrincipal;
+    private static com.k33ptoo.components.KGradientPanel PPrincipal;
     private javax.swing.JLabel btnExit;
     private javax.swing.JLabel imgBg;
     private javax.swing.JLabel jLabel1;
@@ -244,6 +297,7 @@ public class vDashboardMec extends javax.swing.JFrame {
     private com.k33ptoo.components.KButton kButton6;
     private com.k33ptoo.components.KButton kButton7;
     private com.k33ptoo.components.KButton kButton8;
+    private com.k33ptoo.components.KButton kButton9;
     private com.k33ptoo.components.KGradientPanel pArriba;
     // End of variables declaration//GEN-END:variables
 }
