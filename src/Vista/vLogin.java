@@ -4,6 +4,12 @@
  */
 package Vista;
 
+
+import Controlador.cUser;
+import Modelo.crypt;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Fran
@@ -13,6 +19,11 @@ public class vLogin extends javax.swing.JFrame {
     /**
      * Creates new form vLogin
      */
+    crypt cry = new crypt();
+    
+    private int idTipoUs;
+    private int idUsers;
+    private int idCuenta;
     
     int xMouse,yMouse;
     public vLogin() {
@@ -22,6 +33,8 @@ public class vLogin extends javax.swing.JFrame {
         rsscalelabel.RSScaleLabel.setScaleLabel(imgUser, "src/imagenes/usericon.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(imgContr, "src/imagenes/contraicon.png");
         rsscalelabel.RSScaleLabel.setScaleLabel(imgLogo, "src/imagenes/logoinicio.png");
+        
+        
     }
 
     /**
@@ -37,12 +50,12 @@ public class vLogin extends javax.swing.JFrame {
         imgLogo = new javax.swing.JLabel();
         btnIngresar = new com.k33ptoo.components.KButton();
         pLogin = new com.k33ptoo.components.KGradientPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtContra = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
         imgContr = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         imgUser = new javax.swing.JLabel();
-        btnRegistro1 = new javax.swing.JLabel();
+        btnRecuperar = new javax.swing.JLabel();
         btnRegistro = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         imgBg = new javax.swing.JLabel();
@@ -67,6 +80,16 @@ public class vLogin extends javax.swing.JFrame {
         btnIngresar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
         btnIngresar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
         btnIngresar.setkStartColor(new java.awt.Color(153, 153, 153));
+        btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnIngresarMouseClicked(evt);
+            }
+        });
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
         pBg.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 560, 170, 50));
 
         pLogin.setkEndColor(new java.awt.Color(0, 0, 0));
@@ -82,13 +105,18 @@ public class vLogin extends javax.swing.JFrame {
         imgUser.setMaximumSize(new java.awt.Dimension(86, 101));
         imgUser.setMinimumSize(new java.awt.Dimension(86, 101));
 
-        btnRegistro1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnRegistro1.setForeground(new java.awt.Color(0, 153, 0));
-        btnRegistro1.setText("Recuperar contraseña");
+        btnRecuperar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRecuperar.setForeground(new java.awt.Color(0, 153, 0));
+        btnRecuperar.setText("Recuperar contraseña");
 
         btnRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRegistro.setForeground(new java.awt.Color(0, 153, 0));
         btnRegistro.setText("Cree una cuenta");
+        btnRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistroMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 0));
@@ -109,15 +137,15 @@ public class vLogin extends javax.swing.JFrame {
                         .addGroup(pLoginLayout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnRegistro1)))
+                            .addComponent(btnRecuperar)))
                     .addGroup(pLoginLayout.createSequentialGroup()
                         .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(imgContr, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(90, 90, 90)
                         .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(107, Short.MAX_VALUE))
         );
         pLoginLayout.setVerticalGroup(
@@ -125,11 +153,11 @@ public class vLogin extends javax.swing.JFrame {
             .addGroup(pLoginLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(imgContr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -138,7 +166,7 @@ public class vLogin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistro1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRecuperar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -228,9 +256,87 @@ public class vLogin extends javax.swing.JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_pArribaMouseDragged
 
+    public void SelectID() throws SQLException {
+        try {
+            cUser ctUser = new cUser();
+            ctUser.idtipoUser = idTipoUs;
+            ctUser.idUser = idUsers;
+            ResultSet rs = ctUser.SelecionarNivel();
+
+            if (rs.next()) {
+                if (idTipoUs == 1) {
+                    idCuenta = rs.getInt("idAdmin");
+                    vDashboard dashboardAdmin = new vDashboard();
+                    dashboardAdmin.setVisible(true);
+                }
+                if (idTipoUs == 2) {
+                    idCuenta = rs.getInt("idMecanico");
+                    vDashboardMec dashboardMecanico = new vDashboardMec();
+                    dashboardMecanico.setVisible(true);
+                }
+                if (idTipoUs == 3) {
+                    idCuenta = rs.getInt("idEmpleado");
+                    vDashboardCont dashboardContador = new vDashboardCont();
+                    dashboardContador.setVisible(true);
+                }
+                if (idTipoUs == 4) {
+                    idCuenta = rs.getInt("idRecepcionista");
+                    vDashboardRece dashboardRecep = new vDashboardRece();
+                    dashboardRecep.setVisible(true);
+                }
+                
+                rs.close();
+
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+    
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseClicked
+        try {
+            try {
+                cUser ct = new cUser();
+                ct.usuario = txtUser.getText();
+                ct.contra = txtContra.getText();
+                //ct.contra = cry.encrypt(txtContra.getText(), "key");
+                //System.err.println(cry.encrypt(txtContra.getText(), "key"));
+                ResultSet rs=ct.Login();
+                if (rs.next()) {
+                    idTipoUs = rs.getInt("idTipo");
+                    idUsers = rs.getInt("idUsuario");
+                    rs.close();
+                    SelectID();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
+                }
+
+            } catch (SQLException ex) {
+                System.out.println(ex.toString() + " ERROR");
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }//GEN-LAST:event_btnIngresarMouseClicked
+
+    private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
+        vRegistro registro = new vRegistro();
+        registro.setVisible(true);
+        
+    }//GEN-LAST:event_btnRegistroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -270,8 +376,8 @@ public class vLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
     private com.k33ptoo.components.KButton btnIngresar;
+    private javax.swing.JLabel btnRecuperar;
     private javax.swing.JLabel btnRegistro;
-    private javax.swing.JLabel btnRegistro1;
     private javax.swing.JLabel imgBg;
     private javax.swing.JLabel imgContr;
     private javax.swing.JLabel imgLogo;
@@ -279,10 +385,10 @@ public class vLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private com.k33ptoo.components.KGradientPanel pArriba;
     private com.k33ptoo.components.KGradientPanel pBg;
     private com.k33ptoo.components.KGradientPanel pLogin;
+    private javax.swing.JTextField txtContra;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

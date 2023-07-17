@@ -13,7 +13,7 @@ public class conx { // <- Editar por el nombre del archivo de la clase
         
          //Cadena de conexión
         String conexionUrl  = "jdbc:sqlserver://localhost:58233;" // <- Editar por su puerto de SQL
-                            + "databaseName=McDonalds;" // <- Editar por su base de datos
+                            + "databaseName=RScars;" // <- Editar por su base de datos
                             + "user=saaa;"
                             + "password=itr23;" 
                             + "encrypt=true;trustServerCertificate=true";

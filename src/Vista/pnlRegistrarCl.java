@@ -163,7 +163,7 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        PPrincipal.add(pLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 820, 410));
+        PPrincipal.add(pLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 820, 410));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,7 +178,7 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        PPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 530, 730, 180));
+        PPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 600, 730, 180));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -192,10 +192,10 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
         btnRegistrar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
         btnRegistrar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
         btnRegistrar.setkStartColor(new java.awt.Color(153, 153, 153));
-        PPrincipal.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 770, 170, 50));
+        PPrincipal.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 860, 170, 50));
 
         imgBgP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
-        PPrincipal.add(imgBgP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 890));
+        PPrincipal.add(imgBgP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -203,11 +203,13 @@ public class pnlRegistrarCl extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 980, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(PPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(PPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 890, Short.MAX_VALUE)
+            .addGap(0, 1024, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
