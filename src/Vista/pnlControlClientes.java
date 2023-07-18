@@ -26,10 +26,6 @@ import javax.swing.table.DefaultTableModel;
 public class pnlControlClientes extends javax.swing.JPanel {
     
     public int nUs;
-    private int idCl;
-    cCliente controladorCliente = new cCliente();
-    DefaultTableModel model;
-
     /**
      * Creates new form pnlControlClientes
      */
@@ -39,6 +35,8 @@ public class pnlControlClientes extends javax.swing.JPanel {
     public pnlControlClientes() {
         initComponents();
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,8 +51,8 @@ public class pnlControlClientes extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnRegistrar = new com.k33ptoo.components.KButton();
-        btnRegistrar1 = new com.k33ptoo.components.KButton();
-        btnRegistrar2 = new com.k33ptoo.components.KButton();
+        btnEliminar = new com.k33ptoo.components.KButton();
+        btnActualizar = new com.k33ptoo.components.KButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDatosCl = new javax.swing.JTable();
         pLogin = new com.k33ptoo.components.KGradientPanel();
@@ -92,45 +90,45 @@ public class pnlControlClientes extends javax.swing.JPanel {
         btnRegistrar.setkStartColor(new java.awt.Color(153, 153, 153));
         PPrincipal.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 810, 170, 50));
 
-        btnRegistrar1.setText("Eliminar cliente");
-        btnRegistrar1.setkBorderRadius(20);
-        btnRegistrar1.setkEndColor(new java.awt.Color(153, 153, 153));
-        btnRegistrar1.setkHoverForeGround(new java.awt.Color(51, 153, 0));
-        btnRegistrar1.setkHoverStartColor(new java.awt.Color(51, 255, 51));
-        btnRegistrar1.setkStartColor(new java.awt.Color(153, 153, 153));
-        btnRegistrar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEliminar.setText("Eliminar cliente");
+        btnEliminar.setkBorderRadius(20);
+        btnEliminar.setkEndColor(new java.awt.Color(153, 153, 153));
+        btnEliminar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
+        btnEliminar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
+        btnEliminar.setkStartColor(new java.awt.Color(153, 153, 153));
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistrar1MouseClicked(evt);
+                btnEliminarMouseClicked(evt);
             }
         });
-        btnRegistrar1.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrar1ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        PPrincipal.add(btnRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 810, 170, 50));
+        PPrincipal.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 810, 170, 50));
 
-        btnRegistrar2.setText("Actualizar cliente");
-        btnRegistrar2.setkBorderRadius(20);
-        btnRegistrar2.setkEndColor(new java.awt.Color(153, 153, 153));
-        btnRegistrar2.setkHoverForeGround(new java.awt.Color(51, 153, 0));
-        btnRegistrar2.setkHoverStartColor(new java.awt.Color(51, 255, 51));
-        btnRegistrar2.setkStartColor(new java.awt.Color(153, 153, 153));
-        PPrincipal.add(btnRegistrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 810, 170, 50));
+        btnActualizar.setText("Actualizar cliente");
+        btnActualizar.setkBorderRadius(20);
+        btnActualizar.setkEndColor(new java.awt.Color(153, 153, 153));
+        btnActualizar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
+        btnActualizar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
+        btnActualizar.setkStartColor(new java.awt.Color(153, 153, 153));
+        PPrincipal.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 810, 170, 50));
 
         tbDatosCl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "idCliente", "Nombre", "Telefono", "Dirección", "DUI"
+                "idCliente", "idUsuario", "Nombre", "Telefono", "Dirección", "DUI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -138,6 +136,14 @@ public class pnlControlClientes extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tbDatosCl);
+        if (tbDatosCl.getColumnModel().getColumnCount() > 0) {
+            tbDatosCl.getColumnModel().getColumn(0).setResizable(false);
+            tbDatosCl.getColumnModel().getColumn(1).setResizable(false);
+            tbDatosCl.getColumnModel().getColumn(2).setResizable(false);
+            tbDatosCl.getColumnModel().getColumn(3).setResizable(false);
+            tbDatosCl.getColumnModel().getColumn(4).setResizable(false);
+            tbDatosCl.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         PPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 610, 730, 180));
 
@@ -281,25 +287,26 @@ public class pnlControlClientes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrar1ActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelActionPerformed
 
-    private void btnRegistrar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrar1MouseClicked
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
 
-    }//GEN-LAST:event_btnRegistrar1MouseClicked
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
+    
        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.k33ptoo.components.KGradientPanel PPrincipal;
-    private com.k33ptoo.components.KButton btnRegistrar;
-    private com.k33ptoo.components.KButton btnRegistrar1;
-    private com.k33ptoo.components.KButton btnRegistrar2;
+    public com.k33ptoo.components.KButton btnActualizar;
+    public com.k33ptoo.components.KButton btnEliminar;
+    public com.k33ptoo.components.KButton btnRegistrar;
     private javax.swing.JLabel imgBgP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -312,15 +319,15 @@ public class pnlControlClientes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private com.k33ptoo.components.KGradientPanel pLogin;
-    private javax.swing.JTable tbDatosCl;
-    private javax.swing.JTextField txtApe;
-    private javax.swing.JTextField txtContra;
-    private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtDirec;
-    private javax.swing.JTextField txtDui;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtTel;
-    private javax.swing.JTextField txtUser;
+    public javax.swing.JTable tbDatosCl;
+    public javax.swing.JTextField txtApe;
+    public javax.swing.JTextField txtContra;
+    public javax.swing.JTextField txtCorreo;
+    public javax.swing.JTextField txtDirec;
+    public javax.swing.JTextField txtDui;
+    public javax.swing.JTextField txtName;
+    public javax.swing.JTextField txtSearch;
+    public javax.swing.JTextField txtTel;
+    public javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

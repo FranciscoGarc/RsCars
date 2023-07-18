@@ -8,106 +8,192 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JTable;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Fran
  */
 public class mCliente {
-    Connection con = conx.getConexion();
+    public int idCliente;
+    public int idUsuario;
+    public String nombre ;
+    public String apellido;
+    public String dui;
+    public String nacimiento;
+    public String sexo;
+    public String direccion;
+    private JTable ta;
 
-    ResultSet rs;
-    PreparedStatement ps;
+    public String getTelefono() {
+        return telefono;
+    }
 
-    public ResultSet cargarCliente(String nombre) {
-        String query = "Select idCliente, CONCAT(nombre, ' ', apellido) AS 'Nombre', telefono AS 'Telefono', direccion AS 'Dirección', dui AS 'DUI'\n" +
-        "From tbClientes WHERE CONCAT (nombre, ' ', apellido) like ?;";
-        try {
-            ps = con.prepareStatement(query);
-            ps.setString(1, "%"+nombre+"%");
-            rs = ps.executeQuery();
-            return rs;
-        } catch (SQLException e) {
-            e.printStackTrace(); 
-            System.out.println(e.toString());
-            JOptionPane.showMessageDialog(null, "Error al ejecutar");
-            return null; 
-        }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    public String telefono;
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public String getDui() {
+        return dui;
+    }
+
+    public void setDui(String dui) {
+        this.dui = dui;
     }
     
-    public boolean Insert(int idUsuario, String nombre, String apellido,String tele, String direccion, String dui) {
-        String query = "insert into tbClientes values(?,?,?,?,?,?);";
-        try {
-            ps = con.prepareStatement(query);
-            ps.setInt(1, idUsuario);
-            ps.setString(2, nombre);
-            ps.setString(3, apellido);
-            ps.setString(4, tele);
-            ps.setString(5, direccion);
-            ps.setString(6, dui);
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Cliente Registrado");
-            return true;
+    
+    public int getIdUsuario() {
+        return idUsuario;
+    }
 
-        } catch (SQLException e) {
-            e.printStackTrace(); 
-            System.out.println(e.toString());
-            JOptionPane.showMessageDialog(null, "Error al ejecutar");
-            return false; 
-        }
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getNacimiento() {
+        return nacimiento;
+    }
+
+    public void setNacimiento(String nacimiento) {
+        this.nacimiento = nacimiento;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
     
-    public boolean Actualizar(int idCl, String nombre, String apellido, String tele, String direccion, String dui) {
-        String query = "update tbClientes SET nombre=?,apellido=?,telefono=?,direccion=?,dui=? \n" +
-        "where idCliente=?;";
-        try {
-            ps = con.prepareStatement(query);
-            ps.setString(1, nombre);
-            ps.setString(2, apellido);
-            ps.setString(3, tele);
-            ps.setString(4, direccion);
-            ps.setString(5, dui);
-            ps.setInt(6, idCl);
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Cliente actualizado");
+    
+    public boolean AgregarCliente(mCliente clienteModelo){
+        
+        try{
+            PreparedStatement addReserva = conx.getConexion().prepareStatement("insert into tbClientes(idUsuario, nombre, apellido, telefono, direccion, dui) values(?, ?, ?, ?, ?, ?)");
+            addReserva.setInt(1, clienteModelo.getIdUsuario());
+            addReserva.setString(2, clienteModelo.getNombre());            
+            addReserva.setString(3, clienteModelo.getApellido());
+            addReserva.setString(4, clienteModelo.getTelefono());
+            addReserva.setString(5, clienteModelo.getDireccion());
+            addReserva.setString(6, clienteModelo.getDui());
+            
+            
+            addReserva.executeUpdate();
             return true;
-
-        } catch (SQLException e) {
-            e.printStackTrace(); // Manejo de la excepción SQLException
-            System.out.println(e.toString());
-            JOptionPane.showMessageDialog(null, "Error al ejecutar");
-            return false; //DIO ERROR
+        }catch(SQLException ex){
+            System.out.println(ex.toString());
+            return false;
         }
+        
     }
     
-    public ResultSet seleccionarCliente(int idCliente) {
-        String query = "select * from tbClientes where idCliente=?;";
+    public boolean UpdateUsuario(mCliente clienteModelo){
+    
+        
+         int filaSeleccionada = ta.getSelectedRow();
+        //Obtenemos el id de la fila seleccionada
+        String miId = ta.getValueAt(filaSeleccionada, 0).toString();
+        String nom = clienteModelo.getNombre();
+        String apel = clienteModelo.getApellido();
+        String tel = clienteModelo.getTelefono();
+        String direccion = clienteModelo.getDireccion();
+        String dui = clienteModelo.getDui();
+
         try {
-            ps = con.prepareStatement(query);
-            ps.setInt(1, idCliente);
-            rs = ps.executeQuery();
-            return rs;
-        } catch (SQLException e) {
-            e.printStackTrace(); 
-            System.out.println(e.toString());
-            JOptionPane.showMessageDialog(null, "Error al ejecutar");
-            return null; 
+
+            PreparedStatement deleteUser = conx.getConexion().prepareStatement("update tbCliente set nombre = '" + nom + "',"
+                    + " apellido = '"+ apel +"', telefono = '"+tel+"', direccion = '"+direccion+"', dui = '"+dui+"' where idCliente = '"+ miId+"';");
+
+            deleteUser.executeUpdate();
+
+        } catch (Exception e) {
+
+         System.out.println(e.toString());
+
+        }
+        return false;
+
+
+    }
+    
+    public void Mostrar(JTable tableUser) throws SQLException{
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object []{"idCliente", "idUsuario", "Nombre","Telefono","Dirección","DUI"});
+        ta = tableUser;
+        try{
+            Statement statement = conx.getConexion().createStatement();
+            String query = "Select idUsuario, idCliente, CONCAT(nombre, ' ', apellido) AS 'Nombre', telefono AS 'Telefono', direccion AS 'Dirección', dui AS 'DUI'\n" +
+        "From tbClientes;";
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()){
+                modelo.addRow(new Object[] { 
+                    rs.getString("idUsuario"),rs.getString("idCliente"), rs.getString("nombre"), rs.getString("apellido"), 
+                    rs.getString("telefono"), rs.getString("direccion"), rs.getString("dui")});
+            }
+            tableUser.setModel(modelo);
+        }catch(SQLException ex){
+            System.out.println(ex.toString());
         }
     }
 
-    public boolean Eliminar(int idCliente) {
-        String query = "DELETE tbClientes where idCliente=?;";
-        try {
-            ps = con.prepareStatement(query);
-            ps.setInt(1, idCliente);
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Cliente eliminado");
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace(); 
+    public boolean EliminarUsuario(mCliente clienteModelo){
+        try {       
+         int filaSeleccionada = ta.getSelectedRow();
+        //Obtenemos el id de la fila seleccionada
+        String miId = ta.getValueAt(filaSeleccionada, 0).toString();        
+        //borramos        
+            if (miId == "") {
+                  JOptionPane.showMessageDialog(null, "Debe de seleccionar un campo de la tabla");
+                    return false;
+            }
+            else{
+                PreparedStatement deleteUser = conx.getConexion().prepareStatement("delete from tbClientes where idCliente ='" + miId + "'");
+                deleteUser.executeUpdate();
+                 return true;
+            }
+
+        } catch (Exception e) {
+
             System.out.println(e.toString());
-            JOptionPane.showMessageDialog(null, "Error al ejecutar");
+            
             return false;
         }
     }

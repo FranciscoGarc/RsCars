@@ -5,97 +5,100 @@
 package Controlador;
 
 import Modelo.mCliente;
-import java.sql.*;
+import Vista.pnlControlClientes;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
  * @author Fran
  */
-public class cCliente {
-    public int idCliente;
-    public int idUsuario;
-    public String nombre ;
-    public String apellido;
-    public String telefono;
-    public String direccion;
-    public String dui;
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getDui() {
-        return dui;
-    }
-
-    public void setDui(String dui) {
-        this.dui = dui;
-    }
+public class cCliente implements  ActionListener, MouseListener{
+    private mCliente modeloCliente;
+    private pnlControlClientes vistaClientes;
     
-    mCliente modeloCliente = new mCliente();
+    public cCliente(pnlControlClientes vistasClientes, mCliente modloCliente){
+       this.modeloCliente = modloCliente;
+       this.vistaClientes = vistasClientes;
+       this.vistaClientes.btnRegistrar.addActionListener(this);
+       this.vistaClientes.btnActualizar.addActionListener(this);
+       this.vistaClientes.btnEliminar.addActionListener(this);
+       this.vistaClientes.tbDatosCl.addMouseListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+         if(e.getSource() == vistaClientes.btnRegistrar){
+            
+            int idUs = Integer.parseInt(vistaClientes.txtSearch.getText());
+            String name = vistaClientes.txtName.getText();
+            String apel = vistaClientes.txtApe.getText();
+            String tel = vistaClientes.txtTel.getText();
+            String dir = vistaClientes.txtDirec.getText();
+            String dui = vistaClientes.txtDui.getText();
+            
+            if (name.isEmpty()||apel.isEmpty()||tel.isEmpty()||dir.isEmpty()||dui.isEmpty()) {
+                   JOptionPane.showMessageDialog(null, "Llene todos los campos");
+            
+            }
+            else{
+                    modeloCliente.setIdUsuario(Integer.parseInt(vistaClientes.txtSearch.getText().trim()));
+                    modeloCliente.setNombre(vistaClientes.txtName.getText().trim());
+                    modeloCliente.setApellido(vistaClientes.txtApe.getText().trim());
+                    modeloCliente.setTelefono(vistaClientes.txtTel.getText().trim());
+                    modeloCliente.setDireccion(vistaClientes.txtDirec.getText().trim());
+                    modeloCliente.setDui(vistaClientes.txtDui.getText().trim());
+
+                try {
+
+                    modeloCliente.AgregarCliente(modeloCliente);
+                    modeloCliente.Mostrar(vistaClientes.tbDatosCl);
+                    vistaClientes.txtName.setText("");
+                    vistaClientes.txtApe.setText("");
+                    vistaClientes.txtDirec.setText("");
+                    vistaClientes.txtTel.setText("");
+                    vistaClientes.txtDui.setText("");
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(cCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+            }
+        }      
     
-        public ResultSet CargarCliente() {
-        return modeloCliente.cargarCliente(nombre);
-    }
-        public ResultSet SeleccionarCliente() {
-        return modeloCliente.seleccionarCliente(idCliente);
-    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
         
-
-    public boolean AgregarC() {
-        return modeloCliente.Insert(idUsuario,nombre, apellido,telefono,direccion,dui);
     }
 
-    public boolean Actua() {
-        return modeloCliente.Actualizar(idCliente,nombre, apellido, telefono,direccion,dui);
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
     }
 
-    public boolean Eliminar() {
-        return modeloCliente.Eliminar(idCliente);
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
     }
-    
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
+   
 }
