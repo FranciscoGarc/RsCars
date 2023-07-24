@@ -144,8 +144,14 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                              <Component id="btnEnviar" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtPass2" min="-2" pref="270" max="-2" attributes="0"/>
@@ -157,22 +163,15 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="txtCodigo" min="-2" pref="270" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="kButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCambiar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="kButton2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="520" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                          <Component id="kButton3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVerificar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="510" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -196,15 +195,16 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="txtPass2" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="btnEnviar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -214,22 +214,15 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="kButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCambiar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="80" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-                          <Component id="kButton2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="189" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="279" max="32767" attributes="0"/>
-                          <Component id="kButton3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVerificar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -277,17 +270,17 @@
                 <Property name="text" type="java.lang.String" value="Ingrese su nueva contrase&#xf1;a:"/>
               </Properties>
             </Component>
-            <Component class="com.k33ptoo.components.KButton" name="kButton1">
+            <Component class="com.k33ptoo.components.KButton" name="btnCambiar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cambiar la contrase&#xf1;a"/>
               </Properties>
             </Component>
-            <Component class="com.k33ptoo.components.KButton" name="kButton2">
+            <Component class="com.k33ptoo.components.KButton" name="btnEnviar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Enviar codigo"/>
               </Properties>
             </Component>
-            <Component class="com.k33ptoo.components.KButton" name="kButton3">
+            <Component class="com.k33ptoo.components.KButton" name="btnVerificar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Verificar codigo"/>
               </Properties>
