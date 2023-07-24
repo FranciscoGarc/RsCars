@@ -88,33 +88,7 @@ public class cRegistro implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        /*
-        if (e.getSource() == vistaRegistro.btnUser) {
-            String usuario =  vistaRegistro.txtUser1.getText();           
-            String correo = vistaRegistro.txtCorreo.getText();
-            String contra = vistaRegistro.txtPass.getText();
-            String contraConfirm = vistaRegistro.txtPass2.getText();
-            String tipoUsuario = vistaRegistro.txtIdUs.getText();
-            int tipoUs = Integer.parseInt(tipoUsuario);
 
-        if (usuario.isEmpty() || correo.isEmpty() || contra.isEmpty() || contraConfirm.isEmpty()) {
-            JOptionPane.showMessageDialog(vistaRegistro, "Llene todos los campos");
-        } else if (!contra.equals(contraConfirm)) {
-            JOptionPane.showMessageDialog(vistaRegistro, "Las contraseñas no coinciden");
-        } else {
-            modeloUsuario.setIdTipo (tipoUs);
-            modeloUsuario.setUsuario(usuario);
-            modeloUsuario.setCorreo(correo);
-            modeloUsuario.setContra(contra);
-
-            if (modeloUsuario.AgregarUsuario(modeloUsuario)) {
-                JOptionPane.showMessageDialog(vistaRegistro, "Usuario registrado exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(vistaRegistro, "Error al registrar el usuario.");
-            }
-        }
-        }
-*/
             if (e.getSource() == vistaRegistro.btnUser) {
             String idTipoUsuario = vistaRegistro.txtIdUser.getText(); 
             String usuario = vistaRegistro.txtUs.getText();

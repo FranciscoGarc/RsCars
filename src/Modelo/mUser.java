@@ -6,16 +6,14 @@ import java.sql.*;
 public class mUser {
     Connection conex = conx.getConexion();
     crypt encrypt = new crypt();
-    PreparedStatement ps;
-    ResultSet rs;
-    
+
     public ResultSet VerificarUsuario(String usuario) throws SQLException {
         String cm = "select * from tbUsuarios where usuario=? COLLATE SQL_Latin1_General_CP1_CS_AS;";
         try {
-            ps = conex.prepareStatement(cm);
-            ps.setString(1, usuario);
-            rs = ps.executeQuery();
-            return rs;
+            PreparedStatement PreparedStatements = conex.prepareStatement(cm);
+            PreparedStatements.setString(1, usuario);
+            ResultSet resultSet = PreparedStatements.executeQuery();
+            return resultSet;
 
         } catch (SQLException e) {
             e.printStackTrace(); 
@@ -29,12 +27,12 @@ public class mUser {
                 + " AND contra = ? COLLATE SQL_Latin1_General_CP1_CS_AS;";
         try {
 
-            ps = conex.prepareStatement(cm);
-            ps.setString(1, usuario);
-            ps.setString(2, contra);
-            rs = ps.executeQuery();
+            PreparedStatement PreparedStatements = conex.prepareStatement(cm);
+            PreparedStatements.setString(1, usuario);
+            PreparedStatements.setString(2, contra);
+            ResultSet resultSet = PreparedStatements.executeQuery();
 
-            return rs;
+            return resultSet;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,10 +58,10 @@ public class mUser {
             if (idTipoU == 4) {
                 cm = "SELECT * FROM tbRecepcionistas WHERE idUsuario = ?;";
             }
-            ps = conex.prepareStatement(cm);
-            ps.setInt(1, idUser);
-            rs = ps.executeQuery();
-            return rs;
+            PreparedStatement PreparedStatements = conex.prepareStatement(cm);
+            PreparedStatements.setInt(1, idUser);
+            ResultSet resultSet = PreparedStatements.executeQuery();
+            return resultSet;
 
         } catch (SQLException e) {
             e.printStackTrace(); 

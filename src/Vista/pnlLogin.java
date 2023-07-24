@@ -100,6 +100,11 @@ public class pnlLogin extends javax.swing.JPanel {
         btnRecuperar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRecuperar.setForeground(new java.awt.Color(0, 153, 0));
         btnRecuperar.setText("Recuperar contraseña");
+        btnRecuperar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRecuperarMouseClicked(evt);
+            }
+        });
 
         btnRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRegistro.setForeground(new java.awt.Color(0, 153, 0));
@@ -243,6 +248,11 @@ public class pnlLogin extends javax.swing.JPanel {
         vRegistro registro = new vRegistro();
         registro.setVisible(true);
     }//GEN-LAST:event_btnRegistroMouseClicked
+
+    private void btnRecuperarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecuperarMouseClicked
+        vRecupContra recup = new vRecupContra();
+        recup.setVisible(true);
+    }//GEN-LAST:event_btnRecuperarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
