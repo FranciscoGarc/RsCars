@@ -5,11 +5,15 @@
 package Vista;
 
 
-import Controlador.cUser;
+
 import Modelo.crypt;
+import Modelo.mUser;
+import Controlador.cUser;
+import java.awt.BorderLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 /**
  *
  * @author Fran
@@ -19,24 +23,29 @@ public class vLogin extends javax.swing.JFrame {
     /**
      * Creates new form vLogin
      */
-    crypt cry = new crypt();
-    
-    private int idTipoUs;
-    private int idUsers;
-    private int idCuenta;
     
     int xMouse,yMouse;
+    
     public vLogin() {
         initComponents();
         
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgBg, "src/imagenes/bg1.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgUser, "src/imagenes/usericon.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgContr, "src/imagenes/contraicon.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgLogo, "src/imagenes/logoinicio.png");
+
         
-        
+        ShowJPanel(new pnlLogin());
+              
     }
 
+
+
+        public static void ShowJPanel(JPanel p) {
+        p.setSize(1440, 1024);
+        p.setLocation(0,0);
+        
+        pnlBg.removeAll();
+        pnlBg.add(p, BorderLayout.CENTER);
+        pnlBg.revalidate();
+        pnlBg.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,17 +56,7 @@ public class vLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         pBg = new com.k33ptoo.components.KGradientPanel();
-        imgLogo = new javax.swing.JLabel();
-        btnIngresar = new com.k33ptoo.components.KButton();
-        pLogin = new com.k33ptoo.components.KGradientPanel();
-        txtContra = new javax.swing.JTextField();
-        txtUser = new javax.swing.JTextField();
-        imgContr = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        imgUser = new javax.swing.JLabel();
-        btnRecuperar = new javax.swing.JLabel();
-        btnRegistro = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        pnlBg = new javax.swing.JPanel();
         imgBg = new javax.swing.JLabel();
         pArriba = new com.k33ptoo.components.KGradientPanel();
         btnExit = new javax.swing.JLabel();
@@ -66,116 +65,30 @@ public class vLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pBg.setkBorderRadius(0);
         pBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoinicio.png"))); // NOI18N
-        imgLogo.setText("jLabel3");
-        pBg.add(imgLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 370, 90));
-
-        btnIngresar.setText("Ingresar");
-        btnIngresar.setkBorderRadius(20);
-        btnIngresar.setkEndColor(new java.awt.Color(153, 153, 153));
-        btnIngresar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
-        btnIngresar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
-        btnIngresar.setkStartColor(new java.awt.Color(153, 153, 153));
-        btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnIngresarMouseClicked(evt);
-            }
-        });
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
-            }
-        });
-        pBg.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 560, 170, 50));
-
-        pLogin.setkEndColor(new java.awt.Color(0, 0, 0));
-        pLogin.setkStartColor(new java.awt.Color(0, 0, 0));
-
-        imgContr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraicon.png"))); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel2.setText("Has olvidado tu contraseña:");
-
-        imgUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usericon.png"))); // NOI18N
-        imgUser.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgUser.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        btnRecuperar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnRecuperar.setForeground(new java.awt.Color(0, 153, 0));
-        btnRecuperar.setText("Recuperar contraseña");
-
-        btnRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnRegistro.setForeground(new java.awt.Color(0, 153, 0));
-        btnRegistro.setText("Cree una cuenta");
-        btnRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistroMouseClicked(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel1.setText("Aun no tiene cuenta: ");
-
-        javax.swing.GroupLayout pLoginLayout = new javax.swing.GroupLayout(pLogin);
-        pLogin.setLayout(pLoginLayout);
-        pLoginLayout.setHorizontalGroup(
-            pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pLoginLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pLoginLayout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRegistro))
-                        .addGroup(pLoginLayout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnRecuperar)))
-                    .addGroup(pLoginLayout.createSequentialGroup()
-                        .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(imgContr, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(90, 90, 90)
-                        .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(107, Short.MAX_VALUE))
+        javax.swing.GroupLayout pnlBgLayout = new javax.swing.GroupLayout(pnlBg);
+        pnlBg.setLayout(pnlBgLayout);
+        pnlBgLayout.setHorizontalGroup(
+            pnlBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
-        pLoginLayout.setVerticalGroup(
-            pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pLoginLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtContra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgContr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRecuperar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+        pnlBgLayout.setVerticalGroup(
+            pnlBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
         );
 
-        pBg.add(pLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 570, 360));
+        pBg.add(pnlBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 650));
 
         imgBg.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         imgBg.setText("jLabel1");
-        pBg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 800, 670));
+        pBg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 650));
+
+        getContentPane().add(pBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 37, -1, -1));
 
         pArriba.setkBorderRadius(0);
         pArriba.setkEndColor(new java.awt.Color(51, 102, 0));
@@ -212,7 +125,7 @@ public class vLogin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pArribaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 692, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -226,20 +139,7 @@ public class vLogin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pBg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pArriba, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pArriba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pBg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(pArriba, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -256,92 +156,18 @@ public class vLogin extends javax.swing.JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_pArribaMouseDragged
 
-    public void SelectID() throws SQLException {
-        try {
-            cUser ctUser = new cUser();
-            ctUser.idtipoUser = idTipoUs;
-            ctUser.idUser = idUsers;
-            ResultSet rs = ctUser.SelecionarNivel();
 
-            if (rs.next()) {
-                if (idTipoUs == 1) {
-                    idCuenta = rs.getInt("idAdmin");
-                    vDashboard dashboardAdmin = new vDashboard();
-                    dashboardAdmin.setVisible(true);
-                }
-                if (idTipoUs == 2) {
-                    idCuenta = rs.getInt("idMecanico");
-                    vDashboardMec dashboardMecanico = new vDashboardMec();
-                    dashboardMecanico.setVisible(true);
-                }
-                if (idTipoUs == 3) {
-                    idCuenta = rs.getInt("idEmpleado");
-                    vDashboardCont dashboardContador = new vDashboardCont();
-                    dashboardContador.setVisible(true);
-                }
-                if (idTipoUs == 4) {
-                    idCuenta = rs.getInt("idRecepcionista");
-                    vDashboardRece dashboardRecep = new vDashboardRece();
-                    dashboardRecep.setVisible(true);
-                }
-                
-                rs.close();
-
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro");
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
 
     
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIngresarActionPerformed
-
-    private void btnIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseClicked
-        try {
-            try {
-                cUser ct = new cUser();
-                ct.usuario = txtUser.getText();
-                ct.contra = txtContra.getText();
-                //ct.contra = cry.encrypt(txtContra.getText(), "key");
-                //System.err.println(cry.encrypt(txtContra.getText(), "key"));
-                ResultSet rs=ct.Login();
-                if (rs.next()) {
-                    idTipoUs = rs.getInt("idTipo");
-                    idUsers = rs.getInt("idUsuario");
-                    rs.close();
-                    SelectID();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
-                }
-
-            } catch (SQLException ex) {
-                System.out.println(ex.toString() + " ERROR");
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
-    }//GEN-LAST:event_btnIngresarMouseClicked
-
-    private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
-        vRegistro registro = new vRegistro();
-        registro.setVisible(true);
-        
-    }//GEN-LAST:event_btnRegistroMouseClicked
-
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -368,27 +194,18 @@ public class vLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vLogin().setVisible(true);
+                vLogin vistaLogin = new vLogin();
+                vistaLogin.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
-    private com.k33ptoo.components.KButton btnIngresar;
-    private javax.swing.JLabel btnRecuperar;
-    private javax.swing.JLabel btnRegistro;
-    private javax.swing.JLabel imgBg;
-    private javax.swing.JLabel imgContr;
-    private javax.swing.JLabel imgLogo;
-    private javax.swing.JLabel imgUser;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private static javax.swing.JLabel imgBg;
     private javax.swing.JLabel jLabel3;
     private com.k33ptoo.components.KGradientPanel pArriba;
-    private com.k33ptoo.components.KGradientPanel pBg;
-    private com.k33ptoo.components.KGradientPanel pLogin;
-    private javax.swing.JTextField txtContra;
-    private javax.swing.JTextField txtUser;
+    public com.k33ptoo.components.KGradientPanel pBg;
+    private static javax.swing.JPanel pnlBg;
     // End of variables declaration//GEN-END:variables
 }

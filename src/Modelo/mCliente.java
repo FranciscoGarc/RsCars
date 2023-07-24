@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import Modelo.conx;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,97 +104,54 @@ public class mCliente {
     }
     
     
-    public boolean AgregarCliente(mCliente clienteModelo){
-        
-        try{
-            PreparedStatement addReserva = conx.getConexion().prepareStatement("insert into tbClientes(idUsuario, nombre, apellido, telefono, direccion, dui) values(?, ?, ?, ?, ?, ?)");
-            addReserva.setInt(1, clienteModelo.getIdUsuario());
-            addReserva.setString(2, clienteModelo.getNombre());            
-            addReserva.setString(3, clienteModelo.getApellido());
-            addReserva.setString(4, clienteModelo.getTelefono());
-            addReserva.setString(5, clienteModelo.getDireccion());
-            addReserva.setString(6, clienteModelo.getDui());
-            
-            
-            addReserva.executeUpdate();
+    public boolean AgregarCliente(mCliente clienteModelo) {
+
+               try {
+                   
+                   PreparedStatement addCliente = conx.getConexion().prepareStatement("INSERT INTO tbClientes (idUsuario, nombre, apellido, telefono, direccion, dui) VALUES (?, ?, ?, ?, ?, ?);");
+                   
+                   addCliente.setInt(1, clienteModelo.getIdUsuario());
+                   addCliente.setString(2, clienteModelo.getNombre());
+                   addCliente.setString(3, clienteModelo.getApellido());
+                   addCliente.setString(4, clienteModelo.getTelefono());
+                   addCliente.setString(5, clienteModelo.getDireccion());
+                   addCliente.setString(6, clienteModelo.getDui());
+                   
+                   addCliente.executeUpdate();
+                   return true;
+               } catch (SQLException ex) {
+                   System.out.println(ex.toString());
+                   return false;
+               }
+    }
+
+        public boolean ActualizarCliente(mCliente clienteModelo) {
+        try {
+            PreparedStatement updateUsuario = conx.getConexion().prepareStatement("UPDATE tbClientes SET nombre = ?, apellido = ?, telefono = ?, direccion = ?, dui = ? WHERE idCliente = ?");
+            updateUsuario.setString(1, clienteModelo.getNombre());
+            updateUsuario.setString(2, clienteModelo.getApellido());
+            updateUsuario.setString(3, clienteModelo.getTelefono());
+            updateUsuario.setString(4, clienteModelo.getDireccion());
+            updateUsuario.setString(5, clienteModelo.getDui());
+            updateUsuario.setInt(6, clienteModelo.getIdCliente());
+
+            updateUsuario.executeUpdate();
             return true;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.toString());
             return false;
         }
-        
-    }
-    
-    public boolean UpdateUsuario(mCliente clienteModelo){
-    
-        
-         int filaSeleccionada = ta.getSelectedRow();
-        //Obtenemos el id de la fila seleccionada
-        String miId = ta.getValueAt(filaSeleccionada, 0).toString();
-        String nom = clienteModelo.getNombre();
-        String apel = clienteModelo.getApellido();
-        String tel = clienteModelo.getTelefono();
-        String direccion = clienteModelo.getDireccion();
-        String dui = clienteModelo.getDui();
+        }
 
+    public boolean EliminarCliente(mCliente clienteModelo) {
         try {
+            PreparedStatement deleteUser = conx.getConexion().prepareStatement("DELETE FROM tbClientes WHERE idCliente = ?");
+            deleteUser.setInt(1, clienteModelo.getIdUsuario());
 
-            PreparedStatement deleteUser = conx.getConexion().prepareStatement("update tbCliente set nombre = '" + nom + "',"
-                    + " apellido = '"+ apel +"', telefono = '"+tel+"', direccion = '"+direccion+"', dui = '"+dui+"' where idCliente = '"+ miId+"';");
-
-            deleteUser.executeUpdate();
-
-        } catch (Exception e) {
-
-         System.out.println(e.toString());
-
-        }
-        return false;
-
-
-    }
-    
-    public void Mostrar(JTable tableUser) throws SQLException{
-
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new Object []{"idCliente", "idUsuario", "Nombre","Telefono","Dirección","DUI"});
-        ta = tableUser;
-        try{
-            Statement statement = conx.getConexion().createStatement();
-            String query = "Select idUsuario, idCliente, CONCAT(nombre, ' ', apellido) AS 'Nombre', telefono AS 'Telefono', direccion AS 'Dirección', dui AS 'DUI'\n" +
-        "From tbClientes;";
-            ResultSet rs = statement.executeQuery(query);
-            while(rs.next()){
-                modelo.addRow(new Object[] { 
-                    rs.getString("idUsuario"),rs.getString("idCliente"), rs.getString("nombre"), rs.getString("apellido"), 
-                    rs.getString("telefono"), rs.getString("direccion"), rs.getString("dui")});
-            }
-            tableUser.setModel(modelo);
-        }catch(SQLException ex){
+            int rowsAffected = deleteUser.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException ex) {
             System.out.println(ex.toString());
-        }
-    }
-
-    public boolean EliminarUsuario(mCliente clienteModelo){
-        try {       
-         int filaSeleccionada = ta.getSelectedRow();
-        //Obtenemos el id de la fila seleccionada
-        String miId = ta.getValueAt(filaSeleccionada, 0).toString();        
-        //borramos        
-            if (miId == "") {
-                  JOptionPane.showMessageDialog(null, "Debe de seleccionar un campo de la tabla");
-                    return false;
-            }
-            else{
-                PreparedStatement deleteUser = conx.getConexion().prepareStatement("delete from tbClientes where idCliente ='" + miId + "'");
-                deleteUser.executeUpdate();
-                 return true;
-            }
-
-        } catch (Exception e) {
-
-            System.out.println(e.toString());
-            
             return false;
         }
     }

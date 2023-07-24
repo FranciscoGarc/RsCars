@@ -151,6 +151,11 @@ int xMouse, yMouse;
                 kButton6MouseClicked(evt);
             }
         });
+        kButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kButton6ActionPerformed(evt);
+            }
+        });
         PMenu.add(kButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 220, 100));
 
         kButton7.setText("Control de mecanicos");
@@ -238,6 +243,10 @@ int xMouse, yMouse;
         // TODO add your handling code here:
         ShowJPanel(new pnlControlClientes());
     }//GEN-LAST:event_kButton6MouseClicked
+
+    private void kButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kButton6ActionPerformed
 
     /**
      * @param args the command line arguments

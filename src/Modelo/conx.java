@@ -30,4 +30,8 @@ public class conx { // <- Editar por el nombre del archivo de la clase
             return null;
         }
     } 
+
+    public static PreparedStatement prepareStatement(String select_idTipo_tipo_FROM_tbTipoUsuarios) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -6,6 +6,8 @@ package Vista;
 
 import Modelo.mCliente;
 import Controlador.cCliente;
+import Modelo.mUsuario;
+import Controlador.cUsuario;
 import Modelo.crypt;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +28,10 @@ import javax.swing.table.DefaultTableModel;
 public class pnlControlClientes extends javax.swing.JPanel {
     
     public int nUs;
+    private mCliente modeloCliente;
+    private cCliente controladorCliente;
+    private mUsuario modeloUsuario;
+    private cUsuario controladorUsuario;
     /**
      * Creates new form pnlControlClientes
      */
@@ -34,7 +40,16 @@ public class pnlControlClientes extends javax.swing.JPanel {
     
     public pnlControlClientes() {
         initComponents();
+        modeloUsuario = new mUsuario();
+        controladorUsuario = new cUsuario(this, modeloUsuario);
+        modeloCliente = new mCliente();
+        controladorCliente = new cCliente(this, modeloCliente);
+
+       
     }
+    
+
+    
     
 
 
@@ -53,6 +68,7 @@ public class pnlControlClientes extends javax.swing.JPanel {
         btnRegistrar = new com.k33ptoo.components.KButton();
         btnEliminar = new com.k33ptoo.components.KButton();
         btnActualizar = new com.k33ptoo.components.KButton();
+        btnAgregarUsuario = new com.k33ptoo.components.KButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDatosCl = new javax.swing.JTable();
         pLogin = new com.k33ptoo.components.KGradientPanel();
@@ -68,10 +84,10 @@ public class pnlControlClientes extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         txtDirec = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         imgBgP = new javax.swing.JLabel();
 
         PPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -88,7 +104,7 @@ public class pnlControlClientes extends javax.swing.JPanel {
         btnRegistrar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
         btnRegistrar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
         btnRegistrar.setkStartColor(new java.awt.Color(153, 153, 153));
-        PPrincipal.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 810, 170, 50));
+        PPrincipal.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 810, 170, 50));
 
         btnEliminar.setText("Eliminar cliente");
         btnEliminar.setkBorderRadius(20);
@@ -114,21 +130,39 @@ public class pnlControlClientes extends javax.swing.JPanel {
         btnActualizar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
         btnActualizar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
         btnActualizar.setkStartColor(new java.awt.Color(153, 153, 153));
-        PPrincipal.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 810, 170, 50));
+        PPrincipal.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 810, 170, 50));
+
+        btnAgregarUsuario.setText("Agregar Usuario");
+        btnAgregarUsuario.setkBorderRadius(20);
+        btnAgregarUsuario.setkEndColor(new java.awt.Color(153, 153, 153));
+        btnAgregarUsuario.setkHoverForeGround(new java.awt.Color(51, 153, 0));
+        btnAgregarUsuario.setkHoverStartColor(new java.awt.Color(51, 255, 51));
+        btnAgregarUsuario.setkStartColor(new java.awt.Color(153, 153, 153));
+        btnAgregarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarUsuarioMouseClicked(evt);
+            }
+        });
+        btnAgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarUsuarioActionPerformed(evt);
+            }
+        });
+        PPrincipal.add(btnAgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 810, 170, 50));
 
         tbDatosCl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "idCliente", "idUsuario", "Nombre", "Telefono", "Dirección", "DUI"
+                "idUsuario", "Usuario", "Contraseña", "Correo", "idCliente", "Nombre", "Apellido", "Telefono", "Direccion", "DUI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -143,9 +177,13 @@ public class pnlControlClientes extends javax.swing.JPanel {
             tbDatosCl.getColumnModel().getColumn(3).setResizable(false);
             tbDatosCl.getColumnModel().getColumn(4).setResizable(false);
             tbDatosCl.getColumnModel().getColumn(5).setResizable(false);
+            tbDatosCl.getColumnModel().getColumn(6).setResizable(false);
+            tbDatosCl.getColumnModel().getColumn(7).setResizable(false);
+            tbDatosCl.getColumnModel().getColumn(8).setResizable(false);
+            tbDatosCl.getColumnModel().getColumn(9).setResizable(false);
         }
 
-        PPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 610, 730, 180));
+        PPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 590, 730, 180));
 
         pLogin.setkEndColor(new java.awt.Color(0, 0, 0));
         pLogin.setkStartColor(new java.awt.Color(0, 0, 0));
@@ -180,93 +218,95 @@ public class pnlControlClientes extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("DUI:");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Telefono:");
-
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Dirección:");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Telefono:");
 
         javax.swing.GroupLayout pLoginLayout = new javax.swing.GroupLayout(pLogin);
         pLogin.setLayout(pLoginLayout);
         pLoginLayout.setHorizontalGroup(
             pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pLoginLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(90, 90, 90)
                 .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtDirec, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCorreo)
-                            .addComponent(txtUser)
+                    .addGroup(pLoginLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addContainerGap(671, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLoginLayout.createSequentialGroup()
+                        .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDirec)
                             .addGroup(pLoginLayout.createSequentialGroup()
                                 .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(123, 123, 123)
-                                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(txtApe, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLoginLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(620, 620, 620))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLoginLayout.createSequentialGroup()
-                                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtDui, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtContra))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                                    .addComponent(jLabel1)
+                                    .addComponent(txtApe, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCorreo)
+                            .addComponent(txtContra)
+                            .addComponent(txtUser)
+                            .addGroup(pLoginLayout.createSequentialGroup()
+                                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pLoginLayout.createSequentialGroup()
+                                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 96, Short.MAX_VALUE)
+                                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pLoginLayout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(277, 277, 277))
+                                    .addComponent(txtDui))))
+                        .addGap(50, 50, 50))))
         );
         pLoginLayout.setVerticalGroup(
             pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pLoginLayout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pLoginLayout.createSequentialGroup()
-                        .addComponent(txtApe, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLoginLayout.createSequentialGroup()
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApe, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDirec, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDui, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDui, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        PPrincipal.add(pLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 820, 500));
+        PPrincipal.add(pLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 820, 480));
 
         imgBgP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bg1.png"))); // NOI18N
         PPrincipal.add(imgBgP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 890));
@@ -288,7 +328,7 @@ public class pnlControlClientes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+            
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelActionPerformed
@@ -299,23 +339,32 @@ public class pnlControlClientes extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnEliminarMouseClicked
 
+    private void btnAgregarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarUsuarioMouseClicked
+
+    private void btnAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarUsuarioActionPerformed
+
     
        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.k33ptoo.components.KGradientPanel PPrincipal;
     public com.k33ptoo.components.KButton btnActualizar;
+    public com.k33ptoo.components.KButton btnAgregarUsuario;
     public com.k33ptoo.components.KButton btnEliminar;
     public com.k33ptoo.components.KButton btnRegistrar;
     private javax.swing.JLabel imgBgP;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private com.k33ptoo.components.KGradientPanel pLogin;

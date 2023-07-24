@@ -4,31 +4,28 @@
  */
 package Vista;
 
+import javax.swing.JComboBox;
+import Modelo.mUsuario;
+import Controlador.cRegistro;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Fran
  */
 public class vRegistro extends javax.swing.JFrame {
     
+    private mUsuario modeloUsuario;
+    private cRegistro controladorRegistro;
     int xMouse, yMouse;
 
     /**
      * Creates new form vRegistro
      */
     public vRegistro() {
-        initComponents();
-        
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgBg, "src/imagenes/bgdos.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgLogo, "src/imagenes/registrologo.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgCorreo, "src/imagenes/correoicon.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgName, "src/imagenes/nombreicon.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgApel, "src/imagenes/nombreicon.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgUser, "src/imagenes/usericondos.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgContra, "src/imagenes/contraicondos.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgRepContra, "src/imagenes/contraicondos.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgTel, "src/imagenes/telefonoicon.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgDui, "src/imagenes/duicon.png");
-        rsscalelabel.RSScaleLabel.setScaleLabel(imgDire, "src/imagenes/direccicon.png");
+        initComponents();                      
+        ShowJPanel(new pnlRegistroGen());             
     }
 
     /**
@@ -41,31 +38,10 @@ public class vRegistro extends javax.swing.JFrame {
     private void initComponents() {
 
         pBg = new com.k33ptoo.components.KGradientPanel();
-        btnRegistrar = new com.k33ptoo.components.KButton();
-        pLogin = new com.k33ptoo.components.KGradientPanel();
-        jTextField1 = new javax.swing.JTextField();
-        imgName = new javax.swing.JLabel();
-        imgApel = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        imgCorreo = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        imgUser = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        imgContra = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        imgRepContra = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        imgTel = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        imgDui = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        imgDire = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        imgLogo = new javax.swing.JLabel();
-        imgBg = new javax.swing.JLabel();
         pArriba = new com.k33ptoo.components.KGradientPanel();
         btnExit = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        pnlContenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -73,154 +49,6 @@ public class vRegistro extends javax.swing.JFrame {
 
         pBg.setkBorderRadius(0);
         pBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnRegistrar.setText("Registrar");
-        btnRegistrar.setkBorderRadius(20);
-        btnRegistrar.setkEndColor(new java.awt.Color(153, 153, 153));
-        btnRegistrar.setkHoverForeGround(new java.awt.Color(51, 153, 0));
-        btnRegistrar.setkHoverStartColor(new java.awt.Color(51, 255, 51));
-        btnRegistrar.setkStartColor(new java.awt.Color(153, 153, 153));
-        pBg.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 640, 170, 50));
-
-        pLogin.setkEndColor(new java.awt.Color(0, 0, 0));
-        pLogin.setkStartColor(new java.awt.Color(0, 0, 0));
-
-        imgName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombreicon.png"))); // NOI18N
-        imgName.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgName.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        imgApel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombreicon.png"))); // NOI18N
-        imgApel.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgApel.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        imgCorreo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/correoicon.png"))); // NOI18N
-        imgCorreo.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgCorreo.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        imgUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usericondos.png"))); // NOI18N
-        imgUser.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgUser.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        imgContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraicondos.png"))); // NOI18N
-        imgContra.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgContra.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        imgRepContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contraicondos.png"))); // NOI18N
-        imgRepContra.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgRepContra.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        imgTel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/telefonoicon.png"))); // NOI18N
-        imgTel.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgTel.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        imgDui.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/duicon.png"))); // NOI18N
-        imgDui.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgDui.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        imgDire.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/direccicon.png"))); // NOI18N
-        imgDire.setMaximumSize(new java.awt.Dimension(86, 101));
-        imgDire.setMinimumSize(new java.awt.Dimension(86, 101));
-
-        javax.swing.GroupLayout pLoginLayout = new javax.swing.GroupLayout(pLogin);
-        pLogin.setLayout(pLoginLayout);
-        pLoginLayout.setHorizontalGroup(
-            pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pLoginLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pLoginLayout.createSequentialGroup()
-                        .addComponent(imgTel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(imgDui, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pLoginLayout.createSequentialGroup()
-                            .addComponent(imgContra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(65, 65, 65)
-                            .addComponent(imgRepContra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pLoginLayout.createSequentialGroup()
-                                .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField5))
-                            .addGroup(pLoginLayout.createSequentialGroup()
-                                .addComponent(imgCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField4))
-                            .addGroup(pLoginLayout.createSequentialGroup()
-                                .addComponent(imgName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
-                                .addComponent(imgApel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLoginLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(imgDire, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(193, 193, 193))
-        );
-        pLoginLayout.setVerticalGroup(
-            pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pLoginLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField3)
-                        .addComponent(imgApel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField1)
-                        .addComponent(imgName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField4)
-                    .addComponent(imgCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField5)
-                    .addComponent(imgUser, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField6)
-                        .addComponent(imgRepContra, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField2)
-                        .addComponent(imgContra, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField8)
-                        .addComponent(imgDui, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField7)
-                        .addComponent(imgTel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(pLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField9)
-                    .addComponent(imgDire, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-
-        pBg.add(pLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 780, 380));
-
-        imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/registrologo.png"))); // NOI18N
-        imgLogo.setText("jLabel3");
-        pBg.add(imgLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 330, 60));
-
-        imgBg.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bgdos.png"))); // NOI18N
-        pBg.add(imgBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 860, 700));
 
         pArriba.setkBorderRadius(0);
         pArriba.setkEndColor(new java.awt.Color(51, 102, 0));
@@ -273,6 +101,19 @@ public class vRegistro extends javax.swing.JFrame {
 
         pBg.add(pArriba, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 40));
 
+        javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
+        pnlContenedor.setLayout(pnlContenedorLayout);
+        pnlContenedorLayout.setHorizontalGroup(
+            pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 860, Short.MAX_VALUE)
+        );
+        pnlContenedorLayout.setVerticalGroup(
+            pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+
+        pBg.add(pnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 860, 700));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,6 +138,8 @@ public class vRegistro extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseClicked
 
+
+    
     private void pArribaMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pArribaMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
@@ -309,6 +152,15 @@ public class vRegistro extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_pArribaMousePressed
 
+        public static void ShowJPanel(JPanel p) {
+        p.setSize(1440, 1024);
+        p.setLocation(0,0);
+        
+        pnlContenedor.removeAll();
+        pnlContenedor.add(p, BorderLayout.CENTER);
+        pnlContenedor.revalidate();
+        pnlContenedor.repaint();
+    }
     /**
      * @param args the command line arguments
      */
@@ -336,40 +188,23 @@ public class vRegistro extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vRegistro().setVisible(true);
+                vRegistro vistaRegistro = new vRegistro();
+
+                vistaRegistro.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
-    private com.k33ptoo.components.KButton btnRegistrar;
-    private javax.swing.JLabel imgApel;
-    private javax.swing.JLabel imgBg;
-    private javax.swing.JLabel imgContra;
-    private javax.swing.JLabel imgCorreo;
-    private javax.swing.JLabel imgDire;
-    private javax.swing.JLabel imgDui;
-    private javax.swing.JLabel imgLogo;
-    private javax.swing.JLabel imgName;
-    private javax.swing.JLabel imgRepContra;
-    private javax.swing.JLabel imgTel;
-    private javax.swing.JLabel imgUser;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private com.k33ptoo.components.KGradientPanel pArriba;
     private com.k33ptoo.components.KGradientPanel pBg;
-    private com.k33ptoo.components.KGradientPanel pLogin;
+    private static javax.swing.JPanel pnlContenedor;
     // End of variables declaration//GEN-END:variables
 }

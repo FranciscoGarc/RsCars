@@ -49,7 +49,7 @@ public class mUser {
         try {
 
             if (idTipoU == 1) {
-                cm = "SELECT * FROM tbAdministrador WHERE idUsuario = ?;";
+                cm = "SELECT * FROM tbUsuarios WHERE idUsuario = ?;";
             }
             if (idTipoU == 2) {
                 cm = "SELECT * FROM tbMecanicos WHERE idUsuario = ?;";
